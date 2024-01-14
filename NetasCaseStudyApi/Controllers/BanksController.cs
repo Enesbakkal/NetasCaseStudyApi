@@ -106,7 +106,7 @@ namespace NetasCaseStudyApi.Controllers
                 TransactionId = updatedTransaction.Id,
                 TransactionType = "Refund",
                 Status = "Success",
-                Amount = updatedTransaction.TotalAmount,
+                Amount = 0,
             };
             
             _context.TransactionDetails.Add(childEntity);
@@ -153,7 +153,7 @@ namespace NetasCaseStudyApi.Controllers
                 TransactionId = cancaledTransaction.Id,
                 TransactionType = "Cancel",
                 Status = "Success",
-                Amount = cancaledTransaction.TotalAmount,
+                Amount = 0,
             };
 
             _context.TransactionDetails.Add(childEntity);
