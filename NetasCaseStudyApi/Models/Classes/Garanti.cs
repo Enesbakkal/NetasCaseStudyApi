@@ -11,20 +11,20 @@ namespace NetasCaseStudyApi.Models.Classes
         }
         public override PayInputViewModel Pay(PayInputViewModel paymentTrasaction)
         {
-            if (paymentTrasaction.TotalAmount - paymentTrasaction.NetAmount != 0)
+            if (paymentTrasaction.TotalAmount <= 0)
             {
-                throw new PaymentException("Total Amount and Net Amount should be same value.");
+                throw new PaymentException("Total Amount should be bigger than zero");
             }
-            if (paymentTrasaction.TotalAmount - paymentTrasaction.Amount < 0)
+            if (paymentTrasaction.NetAmount <= 0)
             {
-                throw new PaymentException("Total Amount should be bigger than Amount");
+                throw new PaymentException("Net Amount should be bigger than zero");
             }
-            if (paymentTrasaction.NetAmount - paymentTrasaction.Amount < 0)
+            if (paymentTrasaction.Amount <= 0)
             {
-                throw new PaymentException("Net Amount should be bigger than Amount");
+                throw new PaymentException("Amount should be bigger than zero");
             }
             paymentTrasaction.TotalAmount = paymentTrasaction.TotalAmount;
-            paymentTrasaction.NetAmount = paymentTrasaction.TotalAmount - paymentTrasaction.Amount;
+            paymentTrasaction.NetAmount = paymentTrasaction.NetAmount;
             paymentTrasaction.Amount = paymentTrasaction.Amount;
             paymentTrasaction.BankId = this.BankId;
             return paymentTrasaction;
